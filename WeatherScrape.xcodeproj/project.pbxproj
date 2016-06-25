@@ -92,6 +92,7 @@
 		A7FABA131D1E876200141A75 /* Row.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
 		A7FABA151D1E877300141A75 /* Column.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Column.swift; sourceTree = "<group>"; };
 		A7FABA221D1E8BD800141A75 /* FeelTableParseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeelTableParseTests.swift; sourceTree = "<group>"; };
+		A7FABA251D1EBFAF00141A75 /* places.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = places.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +136,7 @@
 		A7CE7B0B1D1E4A03003B5629 /* WeatherScrape */ = {
 			isa = PBXGroup;
 			children = (
+				A7FABA241D1EBFA600141A75 /* Config */,
 				A7FAB9CC1D1E583C00141A75 /* Network */,
 				A7FABA151D1E877300141A75 /* Column.swift */,
 				A7FAB9B81D1E4B8800141A75 /* Ilmateenistus.swift */,
@@ -225,6 +227,14 @@
 				A7FAB9F01D1E6D9B00141A75 /* module.modulemap */,
 			);
 			path = Modules;
+			sourceTree = "<group>";
+		};
+		A7FABA241D1EBFA600141A75 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				A7FABA251D1EBFAF00141A75 /* places.json */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
