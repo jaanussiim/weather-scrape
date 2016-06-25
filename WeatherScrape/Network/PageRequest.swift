@@ -16,8 +16,11 @@
 
 import Foundation
 
+typealias PageResultHandler = (Data?, NSError?) -> ()
+
 class PageRequest: NetworkRequest {
     private let page: String
+    var resultHandler: PageResultHandler!
     
     init(page: String) {
         self.page = page
@@ -30,6 +33,13 @@ class PageRequest: NetworkRequest {
     }
         
     override func handle(result: Result) {
-        
+        switch result {
+        case .Success(_, let data):
+            resultHandler(data, nil)
+        case .Error(let error):
+            resultHandler(nil, error)
+        case .Unknown:
+            resultHandler(nil, nil)
+        }
     }
 }

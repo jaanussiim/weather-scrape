@@ -23,6 +23,8 @@ private struct ColumnDef {
 
 class Page {
     let path: String
+    var hadError = false
+    var table: Table?
     
     init(path: String) {
         self.path = path
@@ -31,6 +33,15 @@ class Page {
     func fetch() {
         Log.debug("fetch \(path)")
         let request = PageRequest(page: path)
+        request.resultHandler = {
+            data, error in
+            
+            if let _ = error {
+                self.hadError = true
+            } else if let pageData = data {
+                self.table = Page.parseTable(from: pageData)
+            }
+        }
         request.execute()
     }
     

@@ -17,5 +17,14 @@
 import Foundation
 
 struct Row {
-    let columns: [Column]
+    private(set) var columns: [Column]
+    
+    func column(named: String) -> Column? {
+        return columns.filter({ $0.title == named}).first
+    }
+    
+    mutating func append(columns: [Column]) {
+        let nextColumns = self.columns + columns
+        self.columns = nextColumns
+    }
 }
