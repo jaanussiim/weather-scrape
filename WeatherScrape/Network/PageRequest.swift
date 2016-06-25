@@ -16,11 +16,20 @@
 
 import Foundation
 
-class Scraper {
-    func scrape() {
-        Log.debug("Scrape")
+class PageRequest: NetworkRequest {
+    private let page: String
+    
+    init(page: String) {
+        self.page = page
         
-        let ilm = Ilmateenistus()
-        ilm.fetch()
+        super.init(baseURL: URL(string: IlmateenusDataBase)!)
+    }
+    
+    override func execute() {
+        GET(page)
+    }
+        
+    override func handle(result: Result) {
+        
     }
 }

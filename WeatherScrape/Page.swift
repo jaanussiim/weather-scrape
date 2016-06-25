@@ -16,11 +16,16 @@
 
 import Foundation
 
-class Scraper {
-    func scrape() {
-        Log.debug("Scrape")
-        
-        let ilm = Ilmateenistus()
-        ilm.fetch()
+class Page {
+    let path: String
+    
+    init(path: String) {
+        self.path = path
+    }
+    
+    func fetch() {
+        Log.debug("fetch \(path)")
+        let request = PageRequest(page: path)
+        request.execute()
     }
 }

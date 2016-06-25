@@ -15,6 +15,12 @@
 		A7FAB9C51D1E4BFB00141A75 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FAB9BF1D1E4BFB00141A75 /* Logger.swift */; };
 		A7FAB9C61D1E4BFB00141A75 /* LogOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FAB9C01D1E4BFB00141A75 /* LogOutput.swift */; };
 		A7FAB9C91D1E4FDF00141A75 /* Scraper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FAB9C81D1E4FDF00141A75 /* Scraper.swift */; };
+		A7FAB9CB1D1E563700141A75 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FAB9CA1D1E563700141A75 /* Page.swift */; };
+		A7FAB9CE1D1E586500141A75 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FAB9CD1D1E586500141A75 /* NetworkRequest.swift */; };
+		A7FAB9D01D1E58D500141A75 /* PageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FAB9CF1D1E58D500141A75 /* PageRequest.swift */; };
+		A7FAB9D81D1E674600141A75 /* ScrapeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FAB9D71D1E674600141A75 /* ScrapeTests.swift */; };
+		A7FAB9DF1D1E688B00141A75 /* Tunniandmed.html in Resources */ = {isa = PBXBuildFile; fileRef = A7FAB9DE1D1E688B00141A75 /* Tunniandmed.html */; };
+		A7FAB9E11D1E68B400141A75 /* Tuulekulm.html in Resources */ = {isa = PBXBuildFile; fileRef = A7FAB9E01D1E68B400141A75 /* Tuulekulm.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,10 +45,25 @@
 		A7FAB9BF1D1E4BFB00141A75 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		A7FAB9C01D1E4BFB00141A75 /* LogOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogOutput.swift; sourceTree = "<group>"; };
 		A7FAB9C81D1E4FDF00141A75 /* Scraper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scraper.swift; sourceTree = "<group>"; };
+		A7FAB9CA1D1E563700141A75 /* Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
+		A7FAB9CD1D1E586500141A75 /* NetworkRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		A7FAB9CF1D1E58D500141A75 /* PageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageRequest.swift; sourceTree = "<group>"; };
+		A7FAB9D51D1E674600141A75 /* ScrapeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScrapeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7FAB9D71D1E674600141A75 /* ScrapeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapeTests.swift; sourceTree = "<group>"; };
+		A7FAB9D91D1E674600141A75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A7FAB9DE1D1E688B00141A75 /* Tunniandmed.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Tunniandmed.html; sourceTree = "<group>"; };
+		A7FAB9E01D1E68B400141A75 /* Tuulekulm.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Tuulekulm.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		A7CE7B061D1E4A03003B5629 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7FAB9D21D1E674600141A75 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -57,6 +78,7 @@
 			children = (
 				A7FAB9BA1D1E4BFB00141A75 /* Thirdparty */,
 				A7CE7B0B1D1E4A03003B5629 /* WeatherScrape */,
+				A7FAB9D61D1E674600141A75 /* ScrapeTests */,
 				A7CE7B0A1D1E4A03003B5629 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -65,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				A7CE7B091D1E4A03003B5629 /* WeatherScrape */,
+				A7FAB9D51D1E674600141A75 /* ScrapeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -72,8 +95,10 @@
 		A7CE7B0B1D1E4A03003B5629 /* WeatherScrape */ = {
 			isa = PBXGroup;
 			children = (
+				A7FAB9CC1D1E583C00141A75 /* Network */,
 				A7FAB9B81D1E4B8800141A75 /* Ilmateenistus.swift */,
 				A7CE7B0C1D1E4A03003B5629 /* main.swift */,
+				A7FAB9CA1D1E563700141A75 /* Page.swift */,
 				A7FAB9C81D1E4FDF00141A75 /* Scraper.swift */,
 			);
 			path = WeatherScrape;
@@ -99,6 +124,34 @@
 			path = SWLogger;
 			sourceTree = "<group>";
 		};
+		A7FAB9CC1D1E583C00141A75 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				A7FAB9CD1D1E586500141A75 /* NetworkRequest.swift */,
+				A7FAB9CF1D1E58D500141A75 /* PageRequest.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		A7FAB9D61D1E674600141A75 /* ScrapeTests */ = {
+			isa = PBXGroup;
+			children = (
+				A7FAB9DD1D1E684600141A75 /* Data */,
+				A7FAB9D71D1E674600141A75 /* ScrapeTests.swift */,
+				A7FAB9D91D1E674600141A75 /* Info.plist */,
+			);
+			path = ScrapeTests;
+			sourceTree = "<group>";
+		};
+		A7FAB9DD1D1E684600141A75 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				A7FAB9DE1D1E688B00141A75 /* Tunniandmed.html */,
+				A7FAB9E01D1E68B400141A75 /* Tuulekulm.html */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -119,6 +172,23 @@
 			productReference = A7CE7B091D1E4A03003B5629 /* WeatherScrape */;
 			productType = "com.apple.product-type.tool";
 		};
+		A7FAB9D41D1E674600141A75 /* ScrapeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A7FAB9DA1D1E674600141A75 /* Build configuration list for PBXNativeTarget "ScrapeTests" */;
+			buildPhases = (
+				A7FAB9D11D1E674600141A75 /* Sources */,
+				A7FAB9D21D1E674600141A75 /* Frameworks */,
+				A7FAB9D31D1E674600141A75 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ScrapeTests;
+			productName = ScrapeTests;
+			productReference = A7FAB9D51D1E674600141A75 /* ScrapeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -130,6 +200,12 @@
 				ORGANIZATIONNAME = "Coodly LLC";
 				TargetAttributes = {
 					A7CE7B081D1E4A03003B5629 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 5T8DRBFCBP;
+						DevelopmentTeamName = "Coodly OU";
+						ProvisioningStyle = Automatic;
+					};
+					A7FAB9D41D1E674600141A75 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 5T8DRBFCBP;
 						DevelopmentTeamName = "Coodly OU";
@@ -150,9 +226,22 @@
 			projectRoot = "";
 			targets = (
 				A7CE7B081D1E4A03003B5629 /* WeatherScrape */,
+				A7FAB9D41D1E674600141A75 /* ScrapeTests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A7FAB9D31D1E674600141A75 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7FAB9DF1D1E688B00141A75 /* Tunniandmed.html in Resources */,
+				A7FAB9E11D1E68B400141A75 /* Tuulekulm.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A7CE7B051D1E4A03003B5629 /* Sources */ = {
@@ -163,10 +252,21 @@
 				A7FAB9C31D1E4BFB00141A75 /* FileOutput.swift in Sources */,
 				A7FAB9C51D1E4BFB00141A75 /* Logger.swift in Sources */,
 				A7CE7B0D1D1E4A03003B5629 /* main.swift in Sources */,
+				A7FAB9CE1D1E586500141A75 /* NetworkRequest.swift in Sources */,
 				A7FAB9C41D1E4BFB00141A75 /* Log.swift in Sources */,
+				A7FAB9CB1D1E563700141A75 /* Page.swift in Sources */,
 				A7FAB9C21D1E4BFB00141A75 /* ConsoleOutput.swift in Sources */,
 				A7FAB9C61D1E4BFB00141A75 /* LogOutput.swift in Sources */,
+				A7FAB9D01D1E58D500141A75 /* PageRequest.swift in Sources */,
 				A7FAB9B91D1E4B8800141A75 /* Ilmateenistus.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7FAB9D11D1E674600141A75 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7FAB9D81D1E674600141A75 /* ScrapeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +371,32 @@
 			};
 			name = Release;
 		};
+		A7FAB9DB1D1E674600141A75 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ScrapeTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.coodly.ScrapeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		A7FAB9DC1D1E674600141A75 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ScrapeTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.coodly.ScrapeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -291,6 +417,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		A7FAB9DA1D1E674600141A75 /* Build configuration list for PBXNativeTarget "ScrapeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7FAB9DB1D1E674600141A75 /* Debug */,
+				A7FAB9DC1D1E674600141A75 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

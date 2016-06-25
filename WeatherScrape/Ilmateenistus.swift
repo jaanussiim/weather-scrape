@@ -16,6 +16,37 @@
 
 import Foundation
 
+let IlmateenusDataBase = "http://www.ilmateenistus.ee/ilm/ilmavaatlused/vaatlusandmed"
+let HourlyDataPath = "/tunniandmed/"
+let FeelTemperaturePath = "/tuulekulm/"
+
 class Ilmateenistus {
+    func fetch() {
+        let pagesToLoad = [
+            Page(path: HourlyDataPath),
+            Page(path: FeelTemperaturePath)
+        ]
+        
+        loadNext(pages: pagesToLoad)
+    }
     
+    private func loadNext(pages: [Page]) {
+        guard let page = pages.first else {
+            Log.debug("All pages loaded")
+            return
+        }
+        
+        load(page) {
+            let index = pages.index(where: {$0.path == page.path})!
+            var remaining = pages
+            remaining.remove(at: index)
+            self.loadNext(pages: remaining)
+        }
+    }
+    
+    private func load(_ page: Page, completion: () -> ()) {
+        Log.debug("Load \(page.path)")
+        page.fetch()
+        completion()
+    }
 }
