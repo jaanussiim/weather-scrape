@@ -16,20 +16,7 @@
 
 import Foundation
 
-class PageRequest: NetworkRequest {
-    private let page: String
-    
-    init(page: String) {
-        self.page = page
-        
-        super.init(baseURL: URL(string: IlmateenusDataBase)!)
-    }
-    
-    override func execute() {
-        GET(page, params: ["lang": "en"])
-    }
-        
-    override func handle(result: Result) {
-        
-    }
+struct Column {
+    let title: String
+    let value: String
 }

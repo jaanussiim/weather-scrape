@@ -16,20 +16,13 @@
 
 import Foundation
 
-class PageRequest: NetworkRequest {
-    private let page: String
-    
-    init(page: String) {
-        self.page = page
-        
-        super.init(baseURL: URL(string: IlmateenusDataBase)!)
-    }
-    
-    override func execute() {
-        GET(page, params: ["lang": "en"])
-    }
-        
-    override func handle(result: Result) {
-        
+protocol DataLoader {
+    func dataFromFile(named: String) -> Data
+}
+
+extension DataLoader {
+    func dataFromFile(named: String) -> Data {
+        let url = Bundle(for: HourlyTableParse.self).urlForResource(named, withExtension: "html")!
+        return try! Data(contentsOf: url)
     }
 }

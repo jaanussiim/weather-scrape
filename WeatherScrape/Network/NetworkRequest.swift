@@ -45,18 +45,27 @@ class NetworkRequest {
         self.baseURL = baseURL
     }
     
-    final func GET(_ path: String) {
-        executeRequest(method: .GET, path: path)
+    final func GET(_ path: String, params: [String: AnyObject] = [:]) {
+        executeRequest(method: .GET, path: path, params: params)
     }
     
-    private func executeRequest(method: HTTPMethod, path: String) {
-        let requestURL = try! baseURL.appendingPathComponent(path)
+    private func executeRequest(method: HTTPMethod, path: String, params: [String: AnyObject]) {
+        var components = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)!
+        components.path = components.path?.appending(path)
+        
+        var queryItems = [URLQueryItem]()
+        for (name, value) in params {
+            queryItems.append(URLQueryItem(name: name, value: "\(value)"))
+        }
+        components.queryItems = queryItems
+        
+        let requestURL = components.url!
         Log.debug("\(method) to \(requestURL)")
         
         var request = URLRequest(url: requestURL)
         request.httpMethod = method.rawValue
         request.addValue("www.jaanussiim.com / jaanussiim@gmail.com", forHTTPHeaderField: "User-Agent")
-        
+
         let completion: (Data?, URLResponse?, NSError?) -> () = {
             data, response, error in
             
@@ -65,9 +74,9 @@ class NetworkRequest {
                 Log.debug("Response code \(httpResponse.statusCode)")
                 statusCode = httpResponse.statusCode
             }
-            if let data = data, string = String(data: data, encoding: String.Encoding.utf8) {
-                //Log.debug("Response body\n\n \(string)")
-            }
+            //if let data = data, string = String(data: data, encoding: String.Encoding.utf8) {
+            //    Log.debug("Response body\n\n \(string)")
+            //}
             
             if let error = error {
                 self.handle(result: .Error(error))

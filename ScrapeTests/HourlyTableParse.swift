@@ -14,22 +14,25 @@
  * limitations under the License.
  */
 
-import Foundation
+import XCTest
 
-class PageRequest: NetworkRequest {
-    private let page: String
-    
-    init(page: String) {
-        self.page = page
+class HourlyTableParse: XCTestCase, DataLoader {
+    func testHourlyTableParse() {
+        let data = dataFromFile(named: "Tunniandmed")
         
-        super.init(baseURL: URL(string: IlmateenusDataBase)!)
-    }
-    
-    override func execute() {
-        GET(page, params: ["lang": "en"])
-    }
+        let table = Page.parseTable(from: data)
+        XCTAssertNotNil(table)
         
-    override func handle(result: Result) {
+        guard let t = table else {
+            return
+        }
         
+        XCTAssertEqual(85, t.rows.count)
+        
+        guard let first = t.rows.first else {
+            return
+        }
+        
+        XCTAssertEqual(13, first.columns.count)
     }
 }
