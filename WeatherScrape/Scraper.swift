@@ -16,8 +16,8 @@
 
 import Foundation
 
-Log.logLevel = Log.Level.DEBUG
-Log.addOutput(output: ConsoleOutput())
-
-let scraper = Scraper()
-scraper.scrape()
+class Scraper {
+    func scrape() {
+        Log.debug("Scrape")
+    }
+}

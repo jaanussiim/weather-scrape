@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		A7CE7B0D1D1E4A03003B5629 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CE7B0C1D1E4A03003B5629 /* main.swift */; };
+		A7FAB9B91D1E4B8800141A75 /* Ilmateenistus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FAB9B81D1E4B8800141A75 /* Ilmateenistus.swift */; };
+		A7FAB9C21D1E4BFB00141A75 /* ConsoleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FAB9BC1D1E4BFB00141A75 /* ConsoleOutput.swift */; };
+		A7FAB9C31D1E4BFB00141A75 /* FileOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FAB9BD1D1E4BFB00141A75 /* FileOutput.swift */; };
+		A7FAB9C41D1E4BFB00141A75 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FAB9BE1D1E4BFB00141A75 /* Log.swift */; };
+		A7FAB9C51D1E4BFB00141A75 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FAB9BF1D1E4BFB00141A75 /* Logger.swift */; };
+		A7FAB9C61D1E4BFB00141A75 /* LogOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FAB9C01D1E4BFB00141A75 /* LogOutput.swift */; };
+		A7FAB9C91D1E4FDF00141A75 /* Scraper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FAB9C81D1E4FDF00141A75 /* Scraper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +32,13 @@
 /* Begin PBXFileReference section */
 		A7CE7B091D1E4A03003B5629 /* WeatherScrape */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = WeatherScrape; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7CE7B0C1D1E4A03003B5629 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		A7FAB9B81D1E4B8800141A75 /* Ilmateenistus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ilmateenistus.swift; sourceTree = "<group>"; };
+		A7FAB9BC1D1E4BFB00141A75 /* ConsoleOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleOutput.swift; sourceTree = "<group>"; };
+		A7FAB9BD1D1E4BFB00141A75 /* FileOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileOutput.swift; sourceTree = "<group>"; };
+		A7FAB9BE1D1E4BFB00141A75 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		A7FAB9BF1D1E4BFB00141A75 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		A7FAB9C01D1E4BFB00141A75 /* LogOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogOutput.swift; sourceTree = "<group>"; };
+		A7FAB9C81D1E4FDF00141A75 /* Scraper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scraper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +55,7 @@
 		A7CE7B001D1E4A03003B5629 = {
 			isa = PBXGroup;
 			children = (
+				A7FAB9BA1D1E4BFB00141A75 /* Thirdparty */,
 				A7CE7B0B1D1E4A03003B5629 /* WeatherScrape */,
 				A7CE7B0A1D1E4A03003B5629 /* Products */,
 			);
@@ -57,9 +72,31 @@
 		A7CE7B0B1D1E4A03003B5629 /* WeatherScrape */ = {
 			isa = PBXGroup;
 			children = (
+				A7FAB9B81D1E4B8800141A75 /* Ilmateenistus.swift */,
 				A7CE7B0C1D1E4A03003B5629 /* main.swift */,
+				A7FAB9C81D1E4FDF00141A75 /* Scraper.swift */,
 			);
 			path = WeatherScrape;
+			sourceTree = "<group>";
+		};
+		A7FAB9BA1D1E4BFB00141A75 /* Thirdparty */ = {
+			isa = PBXGroup;
+			children = (
+				A7FAB9BB1D1E4BFB00141A75 /* SWLogger */,
+			);
+			path = Thirdparty;
+			sourceTree = "<group>";
+		};
+		A7FAB9BB1D1E4BFB00141A75 /* SWLogger */ = {
+			isa = PBXGroup;
+			children = (
+				A7FAB9BC1D1E4BFB00141A75 /* ConsoleOutput.swift */,
+				A7FAB9BD1D1E4BFB00141A75 /* FileOutput.swift */,
+				A7FAB9BE1D1E4BFB00141A75 /* Log.swift */,
+				A7FAB9BF1D1E4BFB00141A75 /* Logger.swift */,
+				A7FAB9C01D1E4BFB00141A75 /* LogOutput.swift */,
+			);
+			path = SWLogger;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -122,7 +159,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7FAB9C91D1E4FDF00141A75 /* Scraper.swift in Sources */,
+				A7FAB9C31D1E4BFB00141A75 /* FileOutput.swift in Sources */,
+				A7FAB9C51D1E4BFB00141A75 /* Logger.swift in Sources */,
 				A7CE7B0D1D1E4A03003B5629 /* main.swift in Sources */,
+				A7FAB9C41D1E4BFB00141A75 /* Log.swift in Sources */,
+				A7FAB9C21D1E4BFB00141A75 /* ConsoleOutput.swift in Sources */,
+				A7FAB9C61D1E4BFB00141A75 /* LogOutput.swift in Sources */,
+				A7FAB9B91D1E4B8800141A75 /* Ilmateenistus.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +290,7 @@
 				A7CE7B121D1E4A03003B5629 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
