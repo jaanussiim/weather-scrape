@@ -61,7 +61,9 @@ class NetworkRequest {
         for (name, value) in params {
             queryItems.append(URLQueryItem(name: name, value: "\(value)"))
         }
-        components.queryItems = queryItems
+        if queryItems.count > 0 {
+            components.queryItems = queryItems
+        }
         
         let requestURL = components.url!
         Log.debug("\(method) to \(requestURL)")
@@ -88,6 +90,7 @@ class NetworkRequest {
             var statusCode = 0
             if let httpResponse = response as? HTTPURLResponse {
                 Log.debug("Response code \(httpResponse.statusCode)")
+                Log.debug("Headers: \(httpResponse.allHeaderFields)")
                 statusCode = httpResponse.statusCode
             }
             if let data = data, string = String(data: data, encoding: String.Encoding.utf8) {

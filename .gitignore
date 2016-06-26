@@ -4,6 +4,7 @@ project.xcworkspace
 xcuserdata
 WeatherScrape/Config/eckey.pem 
 WeatherScrape/Config/config.json
+signed.txt
 
 .build
 swift-weather-scrape.xcodeproj

@@ -53,20 +53,45 @@ class CloudRequest: NetworkRequest {
     
     private func calculateSignature() -> String {
         let base = "\(dateString):\(bodyHash()):\(fullQueryPath!)"
-        return base
+        
+        Log.debug("Base: \(base)")
+        
+        let sig = signature(of: base)
+        Log.debug(sig)
+        
+        return sig
+    }
+    
+    // TODO jaanus: not sure if this is extra mad or clever...
+    // Do it using proper way in future |-(
+    private func signature(of string: String) -> String {
+        let fileName = "signed.txt"
+        do {
+            try FileManager.default().removeItem(atPath: fileName)
+        } catch {}
+        
+        let signedData = string.data(using: String.Encoding.utf8)!
+        try! signedData.write(to: URL(fileURLWithPath: fileName))
+        
+        let task = Task()
+        task.launchPath = "/usr/local/bin/openssl"
+        task.arguments = ["dgst", "-sha256", "-hex", "-sign", "WeatherScrape/Config/eckey.pem", fileName]
+        
+        let pipe = Pipe()
+        task.standardOutput = pipe
+        task.launch()
+        
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        let output = String(data: data, encoding: String.Encoding.utf8)!
+        let split = output.components(separatedBy: " ")
+        let last = split.last!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        return last.dataFromHexadecimalString()!.base64EncodedString()
     }
     
     private func bodyHash() -> String {
         Log.debug("Body: \(String(data: bodyData, encoding: String.Encoding.utf8))")
         let sha256Data = sha256(data: bodyData)
-        let hex = NSData(data: sha256Data).toHexString()
-        Log.debug("SHA256: \(hex)")
-        let result = hex.data(using: String.Encoding.utf8)!.base64EncodedString()
-        Log.debug("Result: \(result)")
-        return result
-        //let resultString = NSData(data: result).toHexString()
-        //Log.debug("Result: \(resultString)")
-        //return resultString
+        return sha256Data.base64EncodedString()
     }
     
     private func sha256(data : Data) -> Data {
@@ -90,5 +115,29 @@ extension NSData {
         }
         
         return string as String
+    }
+}
+
+extension String {
+    
+    /// Create NSData from hexadecimal string representation
+    ///
+    /// This takes a hexadecimal representation and creates a NSData object. Note, if the string has any spaces or non-hex characters (e.g. starts with '<' and with a '>'), those are ignored and only hex characters are processed.
+    ///
+    /// The use of `strtoul` inspired by Martin R at [http://stackoverflow.com/a/26284562/1271826](http://stackoverflow.com/a/26284562/1271826)
+    ///
+    /// - returns: NSData represented by this hexadecimal string.
+    
+    func dataFromHexadecimalString() -> NSData? {
+        let data = NSMutableData(capacity: characters.count / 2)
+        
+        let regex = try! RegularExpression(pattern: "[0-9a-f]{1,2}", options: .caseInsensitive)
+        regex.enumerateMatches(in: self, options: [], range: NSMakeRange(0, characters.count)) { match, flags, stop in
+            let byteString = (self as NSString).substring(with: match!.range)
+            let num = UInt8(byteString.withCString { strtoul($0, nil, 16) })
+            data?.append([num], length: 1)
+        }
+        
+        return data
     }
 }

@@ -22,6 +22,6 @@ class ListLocationsRequest: CloudRequest {
     }
     
     override func execute() {
-        cloudRequest(to: "records/query", query: ["recordType": "Place"])
+        cloudRequest(to: "records/query", query: ["recordType": "Location"])
     }
 }
