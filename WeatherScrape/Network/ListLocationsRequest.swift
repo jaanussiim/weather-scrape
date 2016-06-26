@@ -16,20 +16,12 @@
 
 import Foundation
 
-class Scraper {
-    private let config: CloudConfig
-    
-    init(config: CloudConfig) {
-        self.config = config
+class ListLocationsRequest: CloudRequest {
+    override init(config: CloudConfig) {
+        super.init(config: config)
     }
     
-    func scrape() {
-        Log.debug("Scrape")
-        
-        //let ilm = Ilmateenistus()
-        //ilm.fetch()
-        
-        let cloud = TheCloud(config: config)
-        cloud.listLocations()
+    override func execute() {
+        cloudRequest(to: "records/query", query: ["recordType": "Place"])
     }
 }

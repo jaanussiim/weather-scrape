@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A745665E1D1F933400A9AAB7 /* TheCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = A745665D1D1F933400A9AAB7 /* TheCloud.swift */; };
+		A74566601D1F940F00A9AAB7 /* CloudRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A745665F1D1F940F00A9AAB7 /* CloudRequest.swift */; };
+		A74566621D1F945600A9AAB7 /* ListLocationsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74566611D1F945600A9AAB7 /* ListLocationsRequest.swift */; };
+		A74566641D1F948E00A9AAB7 /* CloudConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74566631D1F948E00A9AAB7 /* CloudConfig.swift */; };
 		A7CE7B0D1D1E4A03003B5629 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CE7B0C1D1E4A03003B5629 /* main.swift */; };
 		A7FAB9B91D1E4B8800141A75 /* Ilmateenistus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FAB9B81D1E4B8800141A75 /* Ilmateenistus.swift */; };
 		A7FAB9C21D1E4BFB00141A75 /* ConsoleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FAB9BC1D1E4BFB00141A75 /* ConsoleOutput.swift */; };
@@ -63,6 +67,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A745665B1D1F914A00A9AAB7 /* eckey.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = eckey.pem; sourceTree = "<group>"; };
+		A745665C1D1F915A00A9AAB7 /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
+		A745665D1D1F933400A9AAB7 /* TheCloud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheCloud.swift; sourceTree = "<group>"; };
+		A745665F1D1F940F00A9AAB7 /* CloudRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudRequest.swift; sourceTree = "<group>"; };
+		A74566611D1F945600A9AAB7 /* ListLocationsRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListLocationsRequest.swift; sourceTree = "<group>"; };
+		A74566631D1F948E00A9AAB7 /* CloudConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudConfig.swift; sourceTree = "<group>"; };
+		A74566661D1FBBC300A9AAB7 /* libcommonCrypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcommonCrypto.tbd; path = usr/lib/system/libcommonCrypto.tbd; sourceTree = SDKROOT; };
 		A7CE7B091D1E4A03003B5629 /* WeatherScrape */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = WeatherScrape; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7CE7B0C1D1E4A03003B5629 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A7FAB9B81D1E4B8800141A75 /* Ilmateenistus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ilmateenistus.swift; sourceTree = "<group>"; };
@@ -113,6 +124,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A74566651D1FBBC300A9AAB7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A74566661D1FBBC300A9AAB7 /* libcommonCrypto.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A7CE7B001D1E4A03003B5629 = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +140,7 @@
 				A7CE7B0B1D1E4A03003B5629 /* WeatherScrape */,
 				A7FAB9D61D1E674600141A75 /* ScrapeTests */,
 				A7CE7B0A1D1E4A03003B5629 /* Products */,
+				A74566651D1FBBC300A9AAB7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -145,6 +165,7 @@
 				A7FABA131D1E876200141A75 /* Row.swift */,
 				A7FAB9C81D1E4FDF00141A75 /* Scraper.swift */,
 				A7FAB9F11D1E6E4B00141A75 /* Table.swift */,
+				A745665D1D1F933400A9AAB7 /* TheCloud.swift */,
 			);
 			path = WeatherScrape;
 			sourceTree = "<group>";
@@ -173,6 +194,9 @@
 		A7FAB9CC1D1E583C00141A75 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				A74566631D1F948E00A9AAB7 /* CloudConfig.swift */,
+				A745665F1D1F940F00A9AAB7 /* CloudRequest.swift */,
+				A74566611D1F945600A9AAB7 /* ListLocationsRequest.swift */,
 				A7FAB9CD1D1E586500141A75 /* NetworkRequest.swift */,
 				A7FAB9CF1D1E58D500141A75 /* PageRequest.swift */,
 			);
@@ -232,7 +256,9 @@
 		A7FABA241D1EBFA600141A75 /* Config */ = {
 			isa = PBXGroup;
 			children = (
+				A745665B1D1F914A00A9AAB7 /* eckey.pem */,
 				A7FABA251D1EBFAF00141A75 /* places.json */,
+				A745665C1D1F915A00A9AAB7 /* config.json */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -333,6 +359,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A74566641D1F948E00A9AAB7 /* CloudConfig.swift in Sources */,
 				A7FAB9C91D1E4FDF00141A75 /* Scraper.swift in Sources */,
 				A7FAB9C31D1E4BFB00141A75 /* FileOutput.swift in Sources */,
 				A7FAB9F61D1E6E9700141A75 /* libxmlHTMLNode.swift in Sources */,
@@ -343,6 +370,7 @@
 				A7CE7B0D1D1E4A03003B5629 /* main.swift in Sources */,
 				A7FAB9CE1D1E586500141A75 /* NetworkRequest.swift in Sources */,
 				A7FAB9F71D1E6E9700141A75 /* libxmlParserOption.swift in Sources */,
+				A74566601D1F940F00A9AAB7 /* CloudRequest.swift in Sources */,
 				A7FAB9C41D1E4BFB00141A75 /* Log.swift in Sources */,
 				A7FABA141D1E876200141A75 /* Row.swift in Sources */,
 				A7FAB9F21D1E6E4B00141A75 /* Table.swift in Sources */,
@@ -350,7 +378,9 @@
 				A7FAB9C21D1E4BFB00141A75 /* ConsoleOutput.swift in Sources */,
 				A7FAB9C61D1E4BFB00141A75 /* LogOutput.swift in Sources */,
 				A7FAB9D01D1E58D500141A75 /* PageRequest.swift in Sources */,
+				A745665E1D1F933400A9AAB7 /* TheCloud.swift in Sources */,
 				A7FAB9B91D1E4B8800141A75 /* Ilmateenistus.swift in Sources */,
+				A74566621D1F945600A9AAB7 /* ListLocationsRequest.swift in Sources */,
 				A7FAB9CB1D1E563700141A75 /* Page.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -472,7 +502,15 @@
 		A7CE7B111D1E4A03003B5629 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Modules";
 			};
@@ -481,7 +519,15 @@
 		A7CE7B121D1E4A03003B5629 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Modules";
 			};
@@ -545,6 +591,7 @@
 				A7FAB9DC1D1E674600141A75 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

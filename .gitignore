@@ -2,3 +2,5 @@
 .DS_Store
 project.xcworkspace
 xcuserdata
+WeatherScrape/Config/eckey.pem 
+WeatherScrape/Config/config.json

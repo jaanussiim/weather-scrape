@@ -16,8 +16,14 @@
 
 import Foundation
 
+print(Process.arguments)
+
+let pathToConfig = Process.arguments[1]
+
 Log.logLevel = Log.Level.DEBUG
 Log.addOutput(output: ConsoleOutput())
 
-let scraper = Scraper()
+let config = CloudConfig(path: pathToConfig)
+
+let scraper = Scraper(config: config)
 scraper.scrape()

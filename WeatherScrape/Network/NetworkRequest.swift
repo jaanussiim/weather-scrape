@@ -49,7 +49,11 @@ class NetworkRequest {
         executeRequest(method: .GET, path: path, params: params)
     }
     
-    private func executeRequest(method: HTTPMethod, path: String, params: [String: AnyObject]) {
+    final func POST(to path: String, body: Data? = nil) {
+        executeRequest(method: .POST, path: path, params: [:], body: body)
+    }
+    
+    private func executeRequest(method: HTTPMethod, path: String, params: [String: AnyObject], body: Data? = nil) {
         var components = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)!
         components.path = components.path?.appending(path)
         
@@ -66,6 +70,18 @@ class NetworkRequest {
         request.httpMethod = method.rawValue
         request.addValue("www.jaanussiim.com / jaanussiim@gmail.com", forHTTPHeaderField: "User-Agent")
 
+        let additionalHeaders = customHeaders()
+        for (name, value) in additionalHeaders {
+            request.addValue(value, forHTTPHeaderField: name)
+        }
+        
+        if let bodyData = body {
+            Log.debug("Attach body \(bodyData.count)")
+            request.httpBody = bodyData
+        }
+        
+        Log.debug("Headers: \(request.allHTTPHeaderFields)")
+        
         let completion: (Data?, URLResponse?, NSError?) -> () = {
             data, response, error in
             
@@ -74,9 +90,9 @@ class NetworkRequest {
                 Log.debug("Response code \(httpResponse.statusCode)")
                 statusCode = httpResponse.statusCode
             }
-            //if let data = data, string = String(data: data, encoding: String.Encoding.utf8) {
-            //    Log.debug("Response body\n\n \(string)")
-            //}
+            if let data = data, string = String(data: data, encoding: String.Encoding.utf8) {
+                Log.debug("Response body\n\n \(string)")
+            }
             
             if let error = error {
                 self.handle(result: .Error(error))
@@ -96,6 +112,10 @@ class NetworkRequest {
     
     func handle(result: Result) {
         Log.debug("Handle: \(result)")
+    }
+    
+    func customHeaders() -> [String: String] {
+        return [:];
     }
 }
 

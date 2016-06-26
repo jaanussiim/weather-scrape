@@ -16,20 +16,16 @@
 
 import Foundation
 
-class Scraper {
+class TheCloud {
     private let config: CloudConfig
     
     init(config: CloudConfig) {
         self.config = config
     }
     
-    func scrape() {
-        Log.debug("Scrape")
-        
-        //let ilm = Ilmateenistus()
-        //ilm.fetch()
-        
-        let cloud = TheCloud(config: config)
-        cloud.listLocations()
+    func listLocations() {
+        Log.debug("List locationss")
+        let request = ListLocationsRequest(config: config)
+        request.execute()
     }
 }

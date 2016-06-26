@@ -16,20 +16,16 @@
 
 import Foundation
 
-class Scraper {
-    private let config: CloudConfig
+class CloudConfig {
+    let environment: String
+    let container: String
+    let keyID: String
     
-    init(config: CloudConfig) {
-        self.config = config
-    }
-    
-    func scrape() {
-        Log.debug("Scrape")
-        
-        //let ilm = Ilmateenistus()
-        //ilm.fetch()
-        
-        let cloud = TheCloud(config: config)
-        cloud.listLocations()
+    init(path: String) {
+        let data = try! Data(contentsOf: URL(fileURLWithPath: pathToConfig))
+        let content = try! JSONSerialization.jsonObject(with: data) as! [String: String]
+        environment = content["environment"]!
+        container = content["container"]!
+        keyID = content["keyID"]!
     }
 }
