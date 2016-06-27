@@ -75,7 +75,7 @@ class CloudRequest: NetworkRequest {
         
         let task = Task()
         task.launchPath = "/usr/local/bin/openssl"
-        task.arguments = ["dgst", "-sha256", "-hex", "-sign", "WeatherScrape/Config/eckey.pem", fileName]
+        task.arguments = ["dgst", "-sha256", "-hex", "-sign", "Config/eckey.pem", fileName]
         
         let pipe = Pipe()
         task.standardOutput = pipe
