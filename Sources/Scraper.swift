@@ -27,9 +27,15 @@ class Scraper {
         Log.debug("Scrape")
         
         let ilm = Ilmateenistus()
-        ilm.fetch()
-        
-        let cloud = TheCloud(config: config)
-        cloud.listLocations()
+        ilm.fetch() {
+            table in
+            
+            let places = Places.load()
+            let data = table.tableByAppending(other: places)
+            Log.debug(data)
+
+            let cloud = TheCloud(config: self.config)
+            cloud.listLocations()
+        }
     }
 }

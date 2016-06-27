@@ -53,7 +53,7 @@ struct Table: CustomStringConvertible {
     }
     
     var description: String {
-        let included = ["Station", "Air temperature (°C)", "Wind chill (°C)", "Wind - direction (°)", "Present weather (sensor)", "Precipitation (mm)", "Wind - speed (m/s)"]
+        let included = ["Station", "Air temperature (°C)", "Wind chill (°C)", "Wind - direction (°)", "Present weather (sensor)", "Precipitation (mm)", "Wind - speed (m/s)", "Lat", "Lng"]
         
         var result = included.joined(separator: "\t|")
         

@@ -23,20 +23,20 @@ let FeelTemperaturePath = "/tuulekulm/"
 class Ilmateenistus {
     private var pages: [Page]!
     
-    func fetch() {
+    func fetch(completion: (Table) -> ()) {
         let pagesToLoad = [
             Page(path: HourlyDataPath),
             Page(path: FeelTemperaturePath)
         ]
         pages = pagesToLoad
         
-        loadNext(pages: pagesToLoad)
+        loadNext(pages: pagesToLoad, completion: completion)
     }
     
-    private func loadNext(pages: [Page]) {
+    private func loadNext(pages: [Page], completion: (Table) -> ()) {
         guard let page = pages.first else {
             Log.debug("All pages loaded")
-            handleData(in: self.pages)
+            handleData(in: self.pages, completion: completion)
             return
         }
         
@@ -44,7 +44,7 @@ class Ilmateenistus {
             let index = pages.index(where: {$0.path == page.path})!
             var remaining = pages
             remaining.remove(at: index)
-            self.loadNext(pages: remaining)
+            self.loadNext(pages: remaining, completion: completion)
         }
     }
     
@@ -54,7 +54,7 @@ class Ilmateenistus {
         completion()
     }
     
-    func handleData(in pages: [Page]) {
+    func handleData(in pages: [Page], completion: (Table) -> ()) {
         if pages.filter({ $0.hadError }).count > 0 {
             Log.error("Had errors!")
             return
@@ -67,6 +67,6 @@ class Ilmateenistus {
             table = table.tableByAppending(other: otherTable)
         }
         
-        Log.debug("Combined data:\n\(table)")
+        completion(table)
     }
 }
