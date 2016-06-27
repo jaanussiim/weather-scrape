@@ -16,12 +16,12 @@
 
 import Foundation
 
-class ListLocationsRequest: CloudRequest<Location> {
+class ListStationsRequest: CloudRequest<Station> {
     override init(config: CloudConfig) {
         super.init(config: config)
     }
     
     override func performRequest() {
-        cloudRequest(to: "records/query", query: ["recordType": "Location"])
+        cloudRequest(to: "records/query", query: ["recordType": "Station"])
     }        
 }

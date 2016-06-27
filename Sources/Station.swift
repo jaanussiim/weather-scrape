@@ -16,6 +16,6 @@
 
 import Foundation
 
-struct Location {
+struct Station {
     let name: String
 }

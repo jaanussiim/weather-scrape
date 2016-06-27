@@ -37,7 +37,7 @@ class CloudRequest<T>: NetworkRequest {
         super.init(baseURL: URL(string: "https://api.apple-cloudkit.com")!)
     }
     
-    func execute(completion: ([T]) -> ()) {
+    final func execute(completion: ([T]) -> ()) {
         self.completion = completion
         performRequest()
     }
@@ -59,10 +59,20 @@ class CloudRequest<T>: NetworkRequest {
     }
     
     func cloudRequest(to path: String, query: [String: AnyObject]) {
-        fullQueryPath = "/database/1/\(config.container)/\(config.environment)/public/\(path)"
         let body: [String: AnyObject] = ["query": query]
-        bodyData = try! JSONSerialization.data(withJSONObject: body)
-        POST(to: fullQueryPath, body: bodyData)
+        let data = try! JSONSerialization.data(withJSONObject: body)
+        send(data, to: path)
+    }
+
+    func cloudRequest(to path: String, body: [String: AnyObject]) {
+        let data = try! JSONSerialization.data(withJSONObject: body)
+        send(data, to: path)
+    }
+    
+    private func send(_ body: Data, to path: String) {
+        bodyData = body
+        fullQueryPath = "/database/1/\(config.container)/\(config.environment)/public/\(path)"
+        POST(to: fullQueryPath, body: body)
     }
     
     override func customHeaders() -> [String : String] {

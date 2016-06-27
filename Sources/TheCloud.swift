@@ -32,7 +32,7 @@ class TheCloud {
     
     func listLocations() {
         Log.debug("List locationss")
-        let request = ListLocationsRequest(config: config)
+        let request = ListStationsRequest(config: config)
         request.execute() {
             locations in
             
@@ -40,7 +40,7 @@ class TheCloud {
         }
     }
     
-    func fetched(_ locations: [Location]) {
+    func fetched(_ locations: [Station]) {
         Log.debug("Fetched \(locations.count) locations")
         
         let unknown = data.filter({
@@ -61,7 +61,10 @@ class TheCloud {
         if unknown.count == 0 {
             afterCreateClosure()
         } else {
-            
+            let request = CreateStationsRequest(config: config, create: unknown)
+            request.execute() {
+                created in
+            }
         }
     }
 }
