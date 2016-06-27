@@ -7,5 +7,6 @@ Log.addOutput(output: ConsoleOutput())
 
 let config = CloudConfig(path: pathToConfig)
 
-let cloud = TheCloud(config: config)
-cloud.listLocations()
+let scrape = Scraper(config: config)
+scrape.scrape()
+
