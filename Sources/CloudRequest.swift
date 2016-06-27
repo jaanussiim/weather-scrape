@@ -17,7 +17,7 @@
 import Foundation
 import CommonCrypto
 
-class CloudRequest: NetworkRequest {
+class CloudRequest<T>: NetworkRequest {
     private let config: CloudConfig
     private lazy var dateString: String = {
         let formatter = DateFormatter()
@@ -29,11 +29,33 @@ class CloudRequest: NetworkRequest {
     }()
     private var fullQueryPath: String!
     private var bodyData: Data!
+    private var completion: (([T]) -> ())!
     
     init(config: CloudConfig) {
         self.config = config
         
         super.init(baseURL: URL(string: "https://api.apple-cloudkit.com")!)
+    }
+    
+    func execute(completion: ([T]) -> ()) {
+        self.completion = completion
+        performRequest()
+    }
+    
+    override func handle(result: Result) {
+        switch result {
+        case .Success(let status, let data):
+            completion([])
+            self.completion = nil
+        case .Error(let error):
+            fatalError("Error \(error)")
+        case .Unknown:
+            fatalError("")
+        }
+    }
+    
+    func performRequest() {
+        fatalError("Override \(#function)")
     }
     
     func cloudRequest(to path: String, query: [String: AnyObject]) {

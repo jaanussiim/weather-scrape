@@ -27,4 +27,30 @@ struct Row {
         let nextColumns = self.columns + columns
         self.columns = nextColumns
     }
+    
+    func double(_ name: String) -> Double? {
+        guard let c = string(for: name) else {
+            return nil
+        }
+        
+        return Double(c)
+    }
+
+    func integer(_ name: String) -> Int? {
+        guard let c = string(for: name) else {
+            return nil
+        }
+        
+        return Int(c)
+    }
+    
+    private func string(for name: String) -> String? {
+        guard let s = column(named: name)?.value else {
+            return nil
+        }
+        
+        let stripped = s.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines())
+        let cleaned = stripped.replacingOccurrences(of: ",", with: ".")
+        return cleaned
+    }
 }

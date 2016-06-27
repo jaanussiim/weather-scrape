@@ -34,8 +34,10 @@ class Scraper {
             let data = table.tableByAppending(other: places)
             Log.debug(data)
 
-            let cloud = TheCloud(config: self.config)
-            cloud.listLocations()
+            let points = WeatherPoint.from(table: data)
+            
+            let cloud = TheCloud(config: self.config, data: points)
+            cloud.upload()
         }
     }
 }

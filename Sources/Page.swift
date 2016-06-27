@@ -60,7 +60,7 @@ class Page {
         var definitions = [ColumnDef]()
         var totalSpan = 0
         for column in headerRows.xpath("//th") {
-            let name = column.text!
+            let name = column.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             let span: Int
             if let spanValue = column["colspan"], value = Int(spanValue) {
                 span = value

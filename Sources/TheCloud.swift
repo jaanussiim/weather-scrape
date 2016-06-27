@@ -18,14 +18,50 @@ import Foundation
 
 class TheCloud {
     private let config: CloudConfig
+    private let data: [WeatherPoint]
     
-    init(config: CloudConfig) {
+    init(config: CloudConfig, data: [WeatherPoint]) {
         self.config = config
+        self.data = data
+    }
+    
+    func upload() {
+        Log.debug("Upload")
+        listLocations()
     }
     
     func listLocations() {
         Log.debug("List locationss")
         let request = ListLocationsRequest(config: config)
-        request.execute()
+        request.execute() {
+            locations in
+            
+            self.fetched(locations)
+        }
+    }
+    
+    func fetched(_ locations: [Location]) {
+        Log.debug("Fetched \(locations.count) locations")
+        
+        let unknown = data.filter({
+            let column = $0
+            if let _ = locations.index(where: { $0.name == column.name }) {
+                return false
+            }
+            
+            return true
+        })
+        
+        Log.debug("Have \(unknown.count) unknown locations")
+        
+        let afterCreateClosure: () -> () = {
+            
+        }
+        
+        if unknown.count == 0 {
+            afterCreateClosure()
+        } else {
+            
+        }
     }
 }
