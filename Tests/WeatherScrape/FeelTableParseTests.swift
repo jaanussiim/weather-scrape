@@ -19,6 +19,11 @@ class FeelTableParseTests: XCTestCase, DataLoader {
             return
         }
         
+        XCTAssertNotNil(t.measuredAt)
+        if let m = t.measuredAt {
+            XCTAssertTrue(m.isSame(Time(year: 2016, month: 06, day: 25, hour: 9, minute: 0)))
+        }
+        
         XCTAssertEqual(29, t.rows.count)
         
         guard let first = t.rows.first else {

@@ -54,6 +54,15 @@ class Page {
             return nil
         }
         
+        var measuredAt: Date? = nil
+        if let dateElement = tableContainer.xpath("//*[contains(concat(' ', @class, ' '), ' utc-info')]").first, text = dateElement.text {
+            let cleaned = text.replacingOccurrences(of: "UTC", with: "")
+            let trimmed = cleaned.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd.MM.yyyy HH:mm"
+            measuredAt = formatter.date(from: trimmed)
+        }
+        
         let table = tableContainer.xpath("//table").first!
 
         let headerRows = table.xpath("//thead/tr[1]").first!
@@ -116,6 +125,6 @@ class Page {
             }
         }
         
-        return Table(rows: rows)
+        return Table(rows: rows, measuredAt: measuredAt)
     }
 }

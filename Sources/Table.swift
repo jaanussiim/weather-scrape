@@ -18,6 +18,7 @@ import Foundation
 
 struct Table: CustomStringConvertible {
     let rows: [Row]
+    let measuredAt: Date?
     
     func tableByAppending(other: Table) -> Table {
         var resultRows = [Row]()
@@ -35,7 +36,7 @@ struct Table: CustomStringConvertible {
             resultRows.append(modified)
         }
         
-        return Table(rows: resultRows)
+        return Table(rows: resultRows, measuredAt: measuredAt)
     }
     
     func row(withColumn: Column) -> Row? {

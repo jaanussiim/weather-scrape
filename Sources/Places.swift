@@ -37,6 +37,6 @@ class Places {
             rows.append(row)
         }
         
-        return Table(rows: rows)
+        return Table(rows: rows, measuredAt: nil)
     }
 }
