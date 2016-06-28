@@ -40,6 +40,7 @@ enum Result: CustomStringConvertible {
 
 class NetworkRequest {
     private let baseURL: URL
+    var logContent = false
     
     init(baseURL: URL) {
         self.baseURL = baseURL
@@ -88,12 +89,12 @@ class NetworkRequest {
             data, response, error in
             
             var statusCode = 0
-            if let httpResponse = response as? HTTPURLResponse {
+            if self.logContent, let httpResponse = response as? HTTPURLResponse {
                 Log.debug("Response code \(httpResponse.statusCode)")
                 Log.debug("Headers: \(httpResponse.allHeaderFields)")
                 statusCode = httpResponse.statusCode
             }
-            if let data = data, string = String(data: data, encoding: String.Encoding.utf8) {
+            if self.logContent, let data = data, string = String(data: data, encoding: String.Encoding.utf8) {
                 Log.debug("Response body\n\n \(string)")
             }
             

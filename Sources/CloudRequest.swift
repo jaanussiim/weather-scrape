@@ -17,7 +17,7 @@
 import Foundation
 import CommonCrypto
 
-class CloudRequest<T>: NetworkRequest {
+class CloudRequest<T: CloudRecord>: NetworkRequest {
     private let config: CloudConfig
     private lazy var dateString: String = {
         let formatter = DateFormatter()
@@ -35,6 +35,8 @@ class CloudRequest<T>: NetworkRequest {
         self.config = config
         
         super.init(baseURL: URL(string: "https://api.apple-cloudkit.com")!)
+
+        self.logContent = true
     }
     
     final func execute(completion: ([T]) -> ()) {
@@ -44,13 +46,43 @@ class CloudRequest<T>: NetworkRequest {
     
     override func handle(result: Result) {
         switch result {
-        case .Success(let status, let data):
-            completion([])
-            self.completion = nil
+        case .Success(_, let data):
+            parseResult(data: data)
         case .Error(let error):
             fatalError("Error \(error)")
         case .Unknown:
             fatalError("")
+        }
+    }
+    
+    private func parseResult(data: Data) {
+        var result = [T]()
+        defer {
+            Log.debug("Parsed \(result.count) objects")
+            completion(result)
+            completion = nil
+        }
+        
+        do {
+            guard let content = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] else {
+                return
+            }
+            
+            guard let records = content["records"] as? [[String: AnyObject]] else {
+                return
+            }
+            
+            Log.debug("Loaded \(records.count) records")
+            for record in records {
+                var created = T()
+                guard created.load(from: record) else {
+                    continue
+                }
+                
+                result.append(created)
+            }
+        } catch let error as NSError {
+            Log.error("Parse error: \(error)")
         }
     }
     

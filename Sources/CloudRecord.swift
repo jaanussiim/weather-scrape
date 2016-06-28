@@ -16,21 +16,27 @@
 
 import Foundation
 
-struct Station: CloudRecord {
-    var recordName: String?
-    private(set) var name: String?
+protocol CloudRecord {
+    var recordName: String? { get set }
     
-    init() {
-        
-    }
+    init()
     
-    mutating func loadFields(from data: [String : AnyObject]) -> Bool {
-        guard let field = data["name"] as? [String: String], name = field["value"] else {
+    mutating func load(from data: [String: AnyObject]) -> Bool
+    mutating func loadFields(from data: [String: AnyObject]) -> Bool
+}
+
+extension CloudRecord {
+    mutating func load(from data: [String: AnyObject]) -> Bool {
+        guard let rName = data["recordName"] as? String else {
+            return false
+        }
+    
+        guard let fields = data["fields"] as? [String: AnyObject] else {
             return false
         }
         
-        self.name = name
+        recordName = rName
         
-        return true
+        return loadFields(from: fields)
     }
 }
