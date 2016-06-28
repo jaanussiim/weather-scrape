@@ -16,28 +16,8 @@
 
 import Foundation
 
-class Scraper {
-    private let config: CloudConfig
-    
-    init(config: CloudConfig) {
-        self.config = config
-    }
-    
-    func scrape() {
-        Log.debug("Scrape")
-        
-        let ilm = Ilmateenistus()
-        ilm.fetch() {
-            table in
-            
-            let places = Places.load()
-            let data = table.tableByAppending(other: places)
-            Log.debug(data)
-
-            let points = WeatherPoint.from(table: data)
-            
-            let cloud = TheCloud(config: self.config, measuredAt: table.measuredAt!, data: points)
-            cloud.upload()
-        }
+extension Date {
+    func milliseconds() -> Double {
+        return timeIntervalSince1970 * 1000
     }
 }

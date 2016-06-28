@@ -19,10 +19,12 @@ import Foundation
 class TheCloud {
     private let config: CloudConfig
     private let data: [WeatherPoint]
+    private let measuredAt: Date
     
-    init(config: CloudConfig, data: [WeatherPoint]) {
+    init(config: CloudConfig, measuredAt: Date, data: [WeatherPoint]) {
         self.config = config
         self.data = data
+        self.measuredAt = measuredAt
     }
     
     func upload() {
@@ -40,12 +42,12 @@ class TheCloud {
         }
     }
     
-    func fetched(_ locations: [Station]) {
-        Log.debug("Fetched \(locations.count) locations")
+    func fetched(_ stations: [Station]) {
+        Log.debug("Fetched \(stations.count) station")
         
         let unknown = data.filter({
             let column = $0
-            if let _ = locations.index(where: { $0.name == column.name }) {
+            if let _ = stations.index(where: { $0.name == column.name }) {
                 return false
             }
             
@@ -54,17 +56,37 @@ class TheCloud {
         
         Log.debug("Have \(unknown.count) unknown locations")
         
-        let afterCreateClosure: () -> () = {
+        let afterCreateClosure: ([Station]) -> () = {
+            stations in
             
+            self.createRecord(points: self.data, stations: stations)
         }
         
         if unknown.count == 0 {
-            afterCreateClosure()
+            afterCreateClosure(stations)
         } else {
             let request = CreateStationsRequest(config: config, create: unknown)
             request.execute() {
                 created in
+                
+                let totalStations = stations + created
+                afterCreateClosure(totalStations)
             }
         }
+    }
+    
+    func createRecord(points: [WeatherPoint], stations: [Station]) {
+        Log.debug("Create record for \(points.count) points from \(stations.count) stations")
+        
+        let request = CreateRecordRequest(config: config, measuredAt: measuredAt)
+        request.execute() {
+            record in
+            
+            self.createMeasurements(record: record.first!, points: points, stations: stations)
+        }
+    }
+    
+    func createMeasurements(record: Record, points: [WeatherPoint], stations: [Station]) {
+        Log.debug("Create measurements")
     }
 }

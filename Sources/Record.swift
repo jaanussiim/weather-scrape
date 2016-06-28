@@ -16,28 +16,10 @@
 
 import Foundation
 
-class Scraper {
-    private let config: CloudConfig
+struct Record: CloudRecord {
+    var recordName: String?
     
-    init(config: CloudConfig) {
-        self.config = config
-    }
-    
-    func scrape() {
-        Log.debug("Scrape")
-        
-        let ilm = Ilmateenistus()
-        ilm.fetch() {
-            table in
-            
-            let places = Places.load()
-            let data = table.tableByAppending(other: places)
-            Log.debug(data)
-
-            let points = WeatherPoint.from(table: data)
-            
-            let cloud = TheCloud(config: self.config, measuredAt: table.measuredAt!, data: points)
-            cloud.upload()
-        }
+    func loadFields(from data: [String : AnyObject]) -> Bool {
+        return true
     }
 }
