@@ -20,12 +20,12 @@ struct WeatherPoint {
     let name: String
     let lat: Double
     let lng: Double
-    let temperature: Double?
+    let temperature: Double
     let conditions: String?
-    let precipitation: Double?
-    let windChill: Double?
-    let windDirection: Int?
-    let windStrength: Double?
+    let precipitation: Double
+    let windChill: Double
+    let windDirection: Int
+    let windStrength: Double
     
     static func from(table: Table) -> [WeatherPoint] {
         var result = [WeatherPoint]()
@@ -37,15 +37,17 @@ struct WeatherPoint {
             
             
             //TODO jaanus: check issue where Tuulemäe coordinates not merged
-            guard let lat = row.double("Lat") else {
+            let lat = row.double("Lat")
+            guard lat > -1000 else {
                 continue
             }
-            guard let lng = row.double("Lng") else {
+            let lng = row.double("Lng")
+            guard lng > -1000 else {
                 continue
             }
             
             let temperature = row.double("Air temperature (°C)")
-            let conditions = row.column(named: "Present weather (sensor)")?.value
+            let conditions = row.column(named: "Present weather (sensor)")?.value.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             let precipitation = row.double("Precipitation (mm)")
             let windChill = row.double("Wind chill (°C)")
             let windDirection = row.integer("Wind - direction (°)")

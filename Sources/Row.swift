@@ -28,20 +28,20 @@ struct Row {
         self.columns = nextColumns
     }
     
-    func double(_ name: String) -> Double? {
-        guard let c = string(for: name) else {
-            return nil
+    func double(_ name: String) -> Double {
+        guard let c = string(for: name) where c.characters.count > 0 else {
+            return -1000
         }
         
-        return Double(c)
+        return Double(c)!
     }
 
-    func integer(_ name: String) -> Int? {
-        guard let c = string(for: name) else {
-            return nil
+    func integer(_ name: String) -> Int {
+        guard let c = string(for: name) where c.characters.count > 0 else {
+            return -1000
         }
         
-        return Int(c)
+        return Int(c)!
     }
     
     private func string(for name: String) -> String? {

@@ -88,5 +88,11 @@ class TheCloud {
     
     func createMeasurements(record: Record, points: [WeatherPoint], stations: [Station]) {
         Log.debug("Create measurements")
+        let request = CreateMeasurementsRequest(config: config, record: record, points: points, stations: stations)
+        request.execute() {
+            measurements in
+            
+            Log.debug("\(measurements.count) measuremenets created")
+        }
     }
 }
