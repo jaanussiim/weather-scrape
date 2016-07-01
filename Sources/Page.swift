@@ -60,6 +60,8 @@ class Page {
             let trimmed = cleaned.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             let formatter = DateFormatter()
             formatter.dateFormat = "dd.MM.yyyy HH:mm"
+            formatter.locale = Locale(localeIdentifier: "en_US_POSIX")
+            formatter.timeZone = TimeZone(abbreviation: "GMT")
             measuredAt = formatter.date(from: trimmed)
         }
         

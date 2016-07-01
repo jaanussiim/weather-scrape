@@ -25,9 +25,11 @@ struct Time {
 }
 
 extension Date {
-    func isSame(_ time: Time) -> Bool {
+    func isSame(_ time: Time, timeZone: TimeZone = TimeZone(abbreviation: "GMT")!) -> Bool {
         let units: Calendar.Unit = [.year, .month, .day, .hour, .minute]
-        let components = Calendar.current().components(units, from: self)
+        let calendar = Calendar(calendarIdentifier: .gregorian)!
+        calendar.timeZone = timeZone
+        let components = calendar.components(units, from: self)
         return components.year == time.year
             && components.month == time.month
             && components.day == time.day
