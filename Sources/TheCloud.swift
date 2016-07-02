@@ -93,6 +93,23 @@ class TheCloud {
             measurements in
             
             Log.debug("\(measurements.count) measuremenets created")
+            self.updateTrigger(with: record)
+        }
+    }
+    
+    func updateTrigger(with record: Record) {
+        Log.debug("Create trigger for \(record)")
+        let request = FetchTriggerRequest(config: config)
+        request.execute() {
+            triggers in
+            
+            Log.debug("Fetched \(triggers.count) triggers")
+            let request = PullTriggerRequest(config: self.config, trigger: triggers.first, record: record)
+            request.execute() {
+                trigger in
+                
+                Log.debug("Trigger pulled")
+            }
         }
     }
 }
