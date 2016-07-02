@@ -23,9 +23,9 @@ class CloudConfig {
     
     init(path: String) {
         let data = try! Data(contentsOf: URL(fileURLWithPath: path))
-        let content = try! JSONSerialization.jsonObject(with: data) as! [String: String]
-        environment = content["environment"]!
-        container = content["container"]!
-        keyID = content["keyID"]!
+        let content = try! JSONSerialization.jsonObject(with: data) as! [String: AnyObject]
+        environment = content["active"] as! String
+        container = content["container"] as! String
+        keyID = (content[environment] as! [String: String])["keyID"]!
     }
 }

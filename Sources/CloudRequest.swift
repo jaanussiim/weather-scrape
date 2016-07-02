@@ -139,7 +139,7 @@ class CloudRequest<T: CloudRecord>: NetworkRequest {
         
         let task = Task()
         task.launchPath = "/usr/local/bin/openssl"
-        task.arguments = ["dgst", "-sha256", "-hex", "-sign", "Config/eckey.pem", fileName]
+        task.arguments = ["dgst", "-sha256", "-hex", "-sign", "Config/eckey-\(config.environment).pem", fileName]
         
         let pipe = Pipe()
         task.standardOutput = pipe
