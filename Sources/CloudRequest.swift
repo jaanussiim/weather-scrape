@@ -82,7 +82,7 @@ class CloudRequest<T: CloudRecord>: NetworkRequest {
                 result.append(created)
             }
         } catch let error as NSError {
-            Log.error("Parse error: \(error)")
+            fatalError("Parse error: \(error)")
         }
     }
     
